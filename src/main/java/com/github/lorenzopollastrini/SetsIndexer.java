@@ -18,10 +18,9 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Set;
 import java.util.StringJoiner;
 
-public class IndexSets {
+public class SetsIndexer {
 
     public static void main(String[] args) throws IOException {
         String indexPathString = "target/index";
@@ -46,7 +45,7 @@ public class IndexSets {
     }
 
     private static void indexSets(IndexWriter writer, String tablesPathString) throws IOException {
-        List<Set<Cell>> sets;
+        List<List<Cell>> sets;
 
         BufferedReader bufferedReader = new BufferedReader(new FileReader(tablesPathString));
 
@@ -60,7 +59,7 @@ public class IndexSets {
 
             sets = table.getSets();
 
-            for (Set<Cell> set : sets) {
+            for (List<Cell> set : sets) {
                 StringJoiner joiner = new StringJoiner(" ");
                 for (Cell cell : set) {
                     joiner.add(cell.getCleanedText());

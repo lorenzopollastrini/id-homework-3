@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class SearchSets {
+public class SetsSearcher {
 
     public static void main(String[] args) throws Exception {
         String indexPathString = "target/index";
