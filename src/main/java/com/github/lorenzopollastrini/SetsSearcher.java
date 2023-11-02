@@ -21,14 +21,44 @@ import java.nio.file.Paths;
 public class SetsSearcher {
 
     public static void main(String[] args) throws Exception {
-        String indexPathString = "target/index";
+        String usage = "Utilizzo: java com.github.lorenzopollastrini.SetsSearcher" +
+                " [-index INDEX_PATH] [-query QUERY]\n\n";
+
+        if (args.length > 0 && ("-h".equals(args[0]) || "-help".equals(args[0]))) {
+            System.out.println(usage);
+            System.exit(0);
+        }
+
+        String indexPathString = null;
+        StringBuilder queryString = null;
+
+        for (int i = 0; i < args.length; i++) {
+            switch (args[i]) {
+                case "-index":
+                    indexPathString = args[++i];
+                    break;
+                case "-query":
+                    queryString = new StringBuilder(args[++i]);
+                    while (i < args.length - 1)
+                        queryString.append(" ").append(args[++i]);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Parametro " + args[i] + " sconosciuto");
+            }
+        }
+
+        if (indexPathString == null || queryString == null) {
+            System.err.println(usage);
+            System.exit(1);
+        }
+
         Path indexPath = Paths.get(indexPathString);
         Directory indexDirectory = FSDirectory.open(indexPath);
 
         Analyzer analyzer = new StandardAnalyzer();
 
         QueryParser parser = new QueryParser("terms", analyzer);
-        Query query = parser.parse("Tom Holland Daniel Radcliffe Elijah Wood Robert Woods");
+        Query query = parser.parse(String.valueOf(queryString));
 
         IndexReader reader = DirectoryReader.open(indexDirectory);
         IndexSearcher searcher = new IndexSearcher(reader);
