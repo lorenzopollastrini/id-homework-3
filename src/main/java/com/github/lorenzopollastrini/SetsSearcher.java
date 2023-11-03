@@ -17,6 +17,8 @@ import org.apache.lucene.store.FSDirectory;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class SetsSearcher {
 
@@ -64,7 +66,11 @@ public class SetsSearcher {
         IndexSearcher searcher = new IndexSearcher(reader);
         searcher.setSimilarity(new OverlapSimilarity());
 
+        Date queryRunStart = new Date();
         runQuery(searcher, query);
+        Date queryRunEnd = new Date();
+        System.out.println("Interrogato l'indice in " +
+                TimeUnit.MILLISECONDS.toSeconds(queryRunEnd.getTime() - queryRunStart.getTime()) + " s");
 
         reader.close();
         indexDirectory.close();
@@ -77,7 +83,7 @@ public class SetsSearcher {
         for (ScoreDoc hit : hits.scoreDocs) {
             Document doc = storedFields.document(hit.doc);
             System.out.println("Document " + hit.doc + ": " +
-                    doc.get("terms") + " (" + hit.score + ")");
+                    doc.get("terms") + " (" + hit.score + ")\n");
         }
     }
 

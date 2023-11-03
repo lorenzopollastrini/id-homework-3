@@ -17,8 +17,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.concurrent.TimeUnit;
 
 public class SetsIndexer {
 
@@ -74,7 +76,12 @@ public class SetsIndexer {
 
         indexSets(writer, tablesPathString);
 
+        Date commitStart = new Date();
+        writer.commit();
         writer.close();
+        Date commitEnd = new Date();
+        System.out.println("Committate le tabelle in " +
+                TimeUnit.MILLISECONDS.toSeconds(commitEnd.getTime() - commitStart.getTime()) + " s");
         indexDirectory.close();
         analyzer.close();
     }
@@ -86,9 +93,11 @@ public class SetsIndexer {
 
         Gson gson = new Gson();
 
+        Date indexingStart = new Date();
         String line = bufferedReader.readLine();
-        int i = 1;
+        int i = 0;
         while (line != null) {
+            i++;
             System.out.println("Extracting sets from table #" + i + "...");
             Table table = gson.fromJson(line, Table.class);
 
@@ -113,10 +122,12 @@ public class SetsIndexer {
             System.out.println("Indexed all sets from table #" + i);
 
             line = bufferedReader.readLine();
-            i++;
         }
+        Date indexingEnd = new Date();
 
-        writer.commit();
+        System.out.println("Indicizzate le colonne di " + i + " tabelle in " +
+                TimeUnit.MILLISECONDS.toSeconds(indexingEnd.getTime() - indexingStart.getTime()) + " s");
+
         bufferedReader.close();
     }
 
