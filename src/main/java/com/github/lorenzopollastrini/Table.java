@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 @Getter
 public class Table {
 
+    private String id;
     private ArrayList<Cell> cells;
     private Coordinates maxDimensions;
 

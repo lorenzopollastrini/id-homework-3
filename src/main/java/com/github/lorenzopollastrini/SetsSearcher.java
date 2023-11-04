@@ -62,10 +62,16 @@ public class SetsSearcher {
         QueryParser parser = new QueryParser("terms", analyzer);
         Query query = parser.parse(String.valueOf(queryString));
 
+        System.out.println("Inizializzazione del lettore dell'indice in corso...");
+        Date readerInitStart = new Date();
         IndexReader reader = DirectoryReader.open(indexDirectory);
+        Date readerInitEnd = new Date();
+        System.out.println("Inizializzazione del lettore dell'indice completata in " +
+                TimeUnit.MILLISECONDS.toSeconds(readerInitEnd.getTime() - readerInitStart.getTime()) + " s");
         IndexSearcher searcher = new IndexSearcher(reader);
         searcher.setSimilarity(new OverlapSimilarity());
 
+        System.out.println("Interrogazione in corso...");
         Date queryRunStart = new Date();
         runQuery(searcher, query);
         Date queryRunEnd = new Date();
@@ -82,8 +88,10 @@ public class SetsSearcher {
         StoredFields storedFields = searcher.storedFields();
         for (ScoreDoc hit : hits.scoreDocs) {
             Document doc = storedFields.document(hit.doc);
-            System.out.println("Document " + hit.doc + ": " +
-                    doc.get("terms") + " (" + hit.score + ")\n");
+            System.out.println("ID del set: " + hit.doc + "\n" +
+                    "ID della tabella: " + doc.get("table_id") + "\n" +
+                    "Score del set: " + hit.score + "\n" +
+                    "Contenuto del set: " + doc.get("terms") + "\n");
         }
     }
 

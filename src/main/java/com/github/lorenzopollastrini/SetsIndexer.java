@@ -76,11 +76,12 @@ public class SetsIndexer {
 
         indexSets(writer, tablesPathString);
 
+        System.out.println("Commit dei set delle tabelle in corso...");
         Date commitStart = new Date();
         writer.commit();
         writer.close();
         Date commitEnd = new Date();
-        System.out.println("Committate le tabelle in " +
+        System.out.println("Committati i set delle tabelle in " +
                 TimeUnit.MILLISECONDS.toSeconds(commitEnd.getTime() - commitStart.getTime()) + " s");
         indexDirectory.close();
         analyzer.close();
@@ -98,7 +99,7 @@ public class SetsIndexer {
         int i = 0;
         while (line != null) {
             i++;
-            System.out.println("Extracting sets from table #" + i + "...");
+            System.out.println("Estrazione e indicizzazione dei set della tabella #" + i + " in corso...");
             Table table = gson.fromJson(line, Table.class);
 
             sets = table.getSets();
@@ -112,6 +113,13 @@ public class SetsIndexer {
                 Document doc = new Document();
                 doc.add(
                         new TextField(
+                                "table_id",
+                                table.getId(),
+                                Field.Store.YES
+                        )
+                );
+                doc.add(
+                        new TextField(
                                 "terms",
                                 joiner.toString(),
                                 Field.Store.YES
@@ -119,13 +127,13 @@ public class SetsIndexer {
                 );
                 writer.addDocument(doc);
             }
-            System.out.println("Indexed all sets from table #" + i);
+            System.out.println("Estratti ed indicizzati i set della tabella #" + i);
 
             line = bufferedReader.readLine();
         }
         Date indexingEnd = new Date();
 
-        System.out.println("Indicizzate le colonne di " + i + " tabelle in " +
+        System.out.println("Indicizzati i set di " + i + " tabelle in " +
                 TimeUnit.MILLISECONDS.toSeconds(indexingEnd.getTime() - indexingStart.getTime()) + " s");
 
         bufferedReader.close();

@@ -83,13 +83,13 @@ public class StatsCalculator {
             }
         }
 
-        System.out.println("Number of tables: " + tables + "\n" +
-                "Average number of rows: " + (float) rows/tables + "\n" +
-                "Average number of columns: " + (float) columns/tables + "\n" +
-                "Average number of null cells: " + (float) nullCells/tables + "\n" +
-                "Distribution of number of rows across tables: " + rowCount2TableCount + "\n" +
-                "Distribution of number of columns across tables: " + columnCount2TableCount + "\n" +
-                "Distribution of number of distinct values across columns: " + distinctValues2ColumnCount + "\n");
+        System.out.println("Numero di tabelle: " + tables + "\n" +
+                "Numero medio di righe: " + (float) rows/tables + "\n" +
+                "Numero medio di colonne: " + (float) columns/tables + "\n" +
+                "Numero medio di valori nulli: " + (float) nullCells/tables + "\n" +
+                "Distribuzione del numero di righe tra le tabelle: " + rowCount2TableCount + "\n" +
+                "Distribuzione del numero di colonne tra le tabelle: " + columnCount2TableCount + "\n" +
+                "Distribuzione del numero di valori distinti tra le colonne: " + distinctValues2ColumnCount + "\n");
     }
 
 }
