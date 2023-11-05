@@ -2,7 +2,7 @@ package com.github.lorenzopollastrini;
 
 import com.google.gson.Gson;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.apache.lucene.codecs.simpletext.SimpleTextCodec;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
@@ -61,7 +61,7 @@ public class SetsIndexer {
         Path indexPath = Paths.get(indexPathString);
         Directory indexDirectory = FSDirectory.open(indexPath);
 
-        Analyzer analyzer = new StandardAnalyzer();
+        Analyzer analyzer = new EnglishAnalyzer();
 
         IndexWriterConfig config = new IndexWriterConfig(analyzer);
         config.setCodec(new SimpleTextCodec());

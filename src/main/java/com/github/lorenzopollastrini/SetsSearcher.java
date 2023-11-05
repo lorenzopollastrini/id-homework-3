@@ -1,7 +1,7 @@
 package com.github.lorenzopollastrini;
 
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
@@ -57,7 +57,7 @@ public class SetsSearcher {
         Path indexPath = Paths.get(indexPathString);
         Directory indexDirectory = FSDirectory.open(indexPath);
 
-        Analyzer analyzer = new StandardAnalyzer();
+        Analyzer analyzer = new EnglishAnalyzer();
 
         QueryParser parser = new QueryParser("terms", analyzer);
         Query query = parser.parse(String.valueOf(queryString));
