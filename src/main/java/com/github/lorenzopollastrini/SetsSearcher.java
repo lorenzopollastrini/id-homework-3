@@ -86,12 +86,15 @@ public class SetsSearcher {
     private static void runQuery(IndexSearcher searcher, Query query) throws IOException {
         TopDocs hits = searcher.search(query, 10);
         StoredFields storedFields = searcher.storedFields();
+        int i = 1;
         for (ScoreDoc hit : hits.scoreDocs) {
             Document doc = storedFields.document(hit.doc);
-            System.out.println("ID del set: " + hit.doc + "\n" +
+            System.out.println("Posizione nel ranking: " + i + "\n" +
+                    "ID del set: " + hit.doc + "\n" +
                     "ID della tabella: " + doc.get("table_id") + "\n" +
                     "Score del set: " + hit.score + "\n" +
                     "Contenuto del set: " + doc.get("terms") + "\n");
+            i++;
         }
     }
 
