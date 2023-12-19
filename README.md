@@ -8,7 +8,7 @@ Il progetto consiste in quanto segue:
 * Calcolo delle statistiche del dataset.
 
 ## Struttura del progetto
-Il progetto richiesto per l’Homework 3 include tre classi Java i cui rispettivi metodi `main` possono essere
+Il progetto include tre classi Java i cui rispettivi metodi `main` possono essere
 eseguiti da riga di comando:
 * **SetsIndexer.java** contiene il codice che indicizza, tramite l'algoritmo MergeList, le colonne (anche chiamate
 _set_) di un file in cui ogni riga è una tabella in formato JSON. In questa repository è disponibile un piccolo dataset 
@@ -19,8 +19,8 @@ dieci colonne del ranking;
 
 ## Comandi
 * `java com.github.lorenzopollastrini.SetsIndexer [-index INDEX_PATH] [-tables TABLES_PATH] [-update]`: indicizza le
-colonne delle tabelle contenute nella directory al percorso `TABLES_PATH`, salvando l'indice al percorso `INDEX_PATH`.
-Se si specifica `-update`, ad ogni esecuzione del comando l'indice non verrà cancellato e ricostruito, bensì aggiornato.
+colonne delle tabelle contenute al percorso `TABLES_PATH`, salvando l'indice al percorso `INDEX_PATH`. Se si specifica
+`-update`, ad ogni esecuzione del comando l'indice non verrà cancellato e ricostruito, bensì aggiornato.
 * `java com.github.lorenzopollastrini.SetsSearcher [-index INDEX_PATH] [-query QUERY]`: interroga l'indice al percorso
 `INDEX_PATH` con la `QUERY` specificata, la quale può essere immessa nella [sintassi interpretata dal Query Parser
   classico di Apache Lucene](
