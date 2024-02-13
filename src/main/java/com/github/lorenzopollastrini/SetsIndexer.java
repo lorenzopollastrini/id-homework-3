@@ -3,7 +3,6 @@ package com.github.lorenzopollastrini;
 import com.google.gson.Gson;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
-import org.apache.lucene.codecs.simpletext.SimpleTextCodec;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.TextField;
@@ -26,7 +25,7 @@ public class SetsIndexer {
 
     public static void main(String[] args) throws IOException {
         String usage = "Utilizzo: java com.github.lorenzopollastrini.SetsIndexer" +
-                " [-index INDEX_PATH] [-tables TABLES_PATH] [-update]\n\n";
+                " -index INDEX_PATH -tables TABLES_PATH [-update]\n\n";
 
         if (args.length > 0 && ("-h".equals(args[0]) || "-help".equals(args[0]))) {
             System.out.println(usage);
@@ -64,7 +63,6 @@ public class SetsIndexer {
         Analyzer analyzer = new EnglishAnalyzer();
 
         IndexWriterConfig config = new IndexWriterConfig(analyzer);
-        config.setCodec(new SimpleTextCodec());
         config.setSimilarity(new OverlapSimilarity());
         if (create) {
             config.setOpenMode(IndexWriterConfig.OpenMode.CREATE);

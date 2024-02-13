@@ -18,10 +18,10 @@ dieci colonne del ranking;
 * **StatsCalculator.java** contiene il codice che calcola e stampa alcune statistiche del dataset.
 
 ## Comandi
-* `java com.github.lorenzopollastrini.SetsIndexer [-index INDEX_PATH] [-tables TABLES_PATH] [-update]`: indicizza le
+* `java com.github.lorenzopollastrini.SetsIndexer -index INDEX_PATH -tables TABLES_PATH [-update]`: indicizza le
 colonne delle tabelle contenute al percorso `TABLES_PATH`, salvando l'indice al percorso `INDEX_PATH`. Se si specifica
 `-update`, ad ogni esecuzione del comando l'indice non verrà cancellato e ricostruito, bensì aggiornato.
-* `java com.github.lorenzopollastrini.SetsSearcher [-index INDEX_PATH] [-query QUERY]`: interroga l'indice al percorso
+* `java com.github.lorenzopollastrini.SetsSearcher -index INDEX_PATH -query QUERY`: interroga l'indice al percorso
 `INDEX_PATH` con la `QUERY` specificata, la quale può essere immessa nella [sintassi interpretata dal Query Parser
   classico di Apache Lucene](
 https://lucene.apache.org/core/9_8_0/queryparser/org/apache/lucene/queryparser/classic/package-summary.html). Va
