@@ -13,8 +13,8 @@ eseguiti da riga di comando:
 * **SetsIndexer.java** contiene il codice che indicizza, tramite l'algoritmo MergeList, le colonne (anche chiamate
 _set_) di un file in cui ogni riga è una tabella in formato JSON. In questa repository è disponibile un piccolo dataset 
 utilizzato in fase di testing;
-* **SetsSearcher.java** contiene il codice che interroga l’indice con una colonna di query. Vengono stampate le prime
-dieci colonne del ranking;
+* **SetsSearcher.java** contiene il codice che interroga l’indice con una colonna di query. Vengono stampate le prime 
+colonne del ranking;
 * **StatsCalculator.java** contiene il codice che calcola e stampa alcune statistiche del dataset.
 
 ## Comandi

@@ -84,7 +84,7 @@ public class SetsSearcher {
     }
 
     private static void runQuery(IndexSearcher searcher, Query query) throws IOException {
-        TopDocs hits = searcher.search(query, 20);
+        TopDocs hits = searcher.search(query, 10);
         StoredFields storedFields = searcher.storedFields();
         int i = 1;
         for (ScoreDoc hit : hits.scoreDocs) {
